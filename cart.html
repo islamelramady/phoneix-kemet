@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلة الشراء | Phoenix Kemet</title>
+  <link rel="icon" type="image/png" href="images/emblem.png">
+  <link rel="stylesheet" href="css/all.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <script src="js/products.js?v=5" defer></script>
+  <script src="js/store.js?v=5" defer></script>
+  <script src="js/layout.js?v=5" defer></script>
+  <script src="js/cart.js?v=5" defer></script>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="section" style="padding-top:20px;">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">الرئيسية</a><span>›</span><span>سلة الشراء</span></div>
+        <h1 class="section-title" style="font-size:1.8rem;text-align:right;">سلة الشراء</h1>
+
+        <div class="checkout-grid">
+          <div>
+            <div id="cart-list" class="cart-list"></div>
+            <div id="cart-empty" class="empty-state" style="display:none;">
+              <i class="fas fa-shopping-bag"></i>
+              <p>سلة الشراء فارغة حالياً.</p>
+              <a class="btn" href="shop.html">تسوّق الآن</a>
+            </div>
+          </div>
+          <div class="cart-summary">
+            <h3 style="color:var(--green);">ملخص الطلب</h3>
+            <div class="row"><span>المجموع الفرعي</span><span id="sub-total">0.00 ج.م</span></div>
+            <div class="row"><span>الشحن (تقديري)</span><span>يُحدد لاحقاً</span></div>
+            <div class="row total"><span>الإجمالي</span><span id="grand-total">0.00 ج.م</span></div>
+
+            <div style="margin:14px 0;">
+              <label style="font-weight:700;display:block;margin-bottom:6px;">كود خصم</label>
+              <div style="display:flex;gap:8px;">
+                <input type="text" id="coupon-input" placeholder="أدخل الكود" style="flex:1;padding:10px 12px;border-radius:8px;border:1px solid var(--gold);background:var(--papyrus-soft);color:var(--charcoal);font-family:inherit;">
+                <button class="btn ghost" id="coupon-btn">تطبيق</button>
+              </div>
+              <p id="coupon-msg" style="font-size:0.85rem;color:var(--clay);margin-top:6px;"></p>
+            </div>
+
+            <button class="btn" style="width:100%;margin-top:10px;" id="checkout-btn">إتمام الطلب (واتساب)</button>
+            <button class="btn ghost" style="width:100%;margin-top:8px;" id="clear-cart-btn">تفريغ السلة</button>
+            <a href="shop.html" class="btn ghost" style="width:100%;margin-top:8px;text-align:center;display:block;">مواصلة التسوق</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="للأعلى"><i class="fas fa-arrow-up"></i></button>
+  <script>
+    (function(){var b=document.getElementById('back-to-top');window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>400);});b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
+  </script>
+</body>
+</html>

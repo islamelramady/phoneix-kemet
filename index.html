@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoenix Kemet | فينيكس كيميت — متجر التراث المصري</title>
+  <meta name="description" content="متجر Phoenix Kemet — منتجات مستوحاة من الحضارة المصرية: ديكور، ملابس، تذكاريات، إكسسوارات، قرطاسية، هدايا.">
+  <link rel="icon" type="image/png" href="images/emblem.png">
+  <link rel="stylesheet" href="css/all.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <script src="js/products.js?v=5" defer></script>
+  <script src="js/store.js?v=5" defer></script>
+  <script src="js/layout.js?v=5" defer></script>
+  <script src="js/home.js?v=5" defer></script>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <img class="hero-logo" src="images/logo.png" alt="Phoenix Kemet">
+        <div class="ornament"><i class="fas fa-anchor"></i><i class="fas fa-sun"></i><i class="fas fa-anchor"></i></div>
+        <p class="hero-poem" style="max-width:700px; margin:0 auto 24px;">
+          منتجات مستوحاة من الحضارة المصرية — تسوّق الآن، واستلم بسرعة، وادفع عند الاستلام.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="shop.html">تسوّق منتجاتنا <i class="fas fa-shopping-bag"></i></a>
+          <a class="btn ghost" href="about.html">تعرّف علينا</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num" id="stat-products">0</div><div class="lbl">منتج</div></div>
+          <div class="hero-stat"><div class="num">6</div><div class="lbl">تصنيفات</div></div>
+          <div class="hero-stat"><div class="num">24/7</div><div class="lbl">طلب عبر واتساب</div></div>
+        </div>
+      </div>
+    </section>
+
+    <img class="skyline-band" src="images/skyline.png" alt="حدود فرعونية">
+    <p class="skyline-caption">"ومن هنا... تبدأ رحلتك."</p>
+
+    <!-- Categories -->
+    <section class="section">
+      <div class="container">
+        <div class="ornament"><i class="fas fa-gem"></i></div>
+        <h2 class="section-title">التصنيفات</h2>
+        <p class="section-sub">اختر الفئة المناسبة لمزاجك وحجم دفعتك.</p>
+        <div id="home-cats" class="grid cols-3"></div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="section" style="background:linear-gradient(160deg, rgba(201,162,75,0.08), transparent);">
+      <div class="container">
+        <div class="ornament"><i class="fas fa-star"></i></div>
+        <h2 class="section-title">منتجات مميزة</h2>
+        <p class="section-sub">آخر الواردات وأحدث العروض.</p>
+        <div id="featured-grid" class="shop-grid"></div>
+        <div style="text-align:center; margin-top:45px;">
+          <a class="btn" href="shop.html">ادخل المتجر <i class="fas fa-arrow-left"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background:var(--papyrus-soft);">
+      <div class="container">
+        <div class="ornament"><i class="fas fa-quote-right"></i></div>
+        <h2 class="section-title">آراء عملائنا</h2>
+        <div class="grid cols-3" id="testimonials"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="للأعلى"><i class="fas fa-arrow-up"></i></button>
+
+  <div class="modal-overlay" id="quickview-modal"><div class="modal"><button class="modal-close" id="qv-close"><i class="fas fa-times"></i></button><div id="qv-content"></div></div></div>
+
+  <script>
+    // back to top
+    (function(){
+      var b=document.getElementById('back-to-top');
+      window.addEventListener('scroll',function(){ b.classList.toggle('show', window.scrollY>400); });
+      b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+    })();
+  </script>
+</body>
+</html>

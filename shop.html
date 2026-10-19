@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المتجر | Phoenix Kemet</title>
+  <meta name="description" content="تصفح جميع منتجات Phoenix Kemet.">
+  <link rel="icon" type="image/png" href="images/emblem.png">
+  <link rel="stylesheet" href="css/all.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <script src="js/products.js?v=5" defer></script>
+  <script src="js/store.js?v=5" defer></script>
+  <script src="js/layout.js?v=5" defer></script>
+  <script src="js/shop.js?v=5" defer></script>
+</head>
+<body>
+
+  <header class="site-header" id="site-header"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <div class="breadcrumb-ornament"><i class="fas fa-shopping-bag"></i></div>
+        <h1>متجر Phoenix Kemet</h1>
+        <p class="en">PHOENIX KEMET SHOP</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px;">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="index.html">الرئيسية</a><span>›</span><span>المتجر</span>
+        </div>
+
+        <div class="shop-toolbar">
+          <input type="search" id="shop-search" placeholder="ابحث عن منتج...">
+          <select id="shop-sort">
+            <option value="featured">ترتيب: مميز</option>
+            <option value="newest">ترتيب: الأحدث</option>
+            <option value="price-asc">ترتيب: السعر من الأقل</option>
+            <option value="price-desc">ترتيب: السعر من الأعلى</option>
+            <option value="rating">ترتيب: الأعلى تقييماً</option>
+          </select>
+        </div>
+
+        <div class="cat-pills" id="shop-cats"></div>
+
+        <p id="shop-count" style="text-align:center;color:var(--clay);margin-bottom:16px;"></p>
+
+        <div id="shop-grid" class="shop-grid"></div>
+        <div id="shop-empty" class="empty-state" style="display:none;">
+          <i class="fas fa-search"></i>
+          <p>لم يتم العثور على منتجات مطابقة.</p>
+        </div>
+        <div class="pagination" id="shop-pagination"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="للأعلى"><i class="fas fa-arrow-up"></i></button>
+  <div class="modal-overlay" id="quickview-modal"><div class="modal"><button class="modal-close" id="qv-close"><i class="fas fa-times"></i></button><div id="qv-content"></div></div></div>
+
+  <script>
+    (function(){var b=document.getElementById('back-to-top');window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>400);});b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
+  </script>
+</body>
+</html>
