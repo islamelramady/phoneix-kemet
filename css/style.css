@@ -748,6 +748,27 @@ img {
   color: var(--sand-gold);
 }
 
+/* Subtle designer credit */
+.footer-credit {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(246, 242, 232, 0.45);
+  letter-spacing: 0.2px;
+}
+
+.footer-credit a {
+  color: rgba(246, 242, 232, 0.6);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(201, 162, 75, 0.5);
+  transition: 0.25s;
+}
+
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--sand-gold);
+  border-bottom-color: var(--sand-gold);
+}
+
 .reveal { transition: opacity 0.8s ease, transform 0.8s ease; }
 
 body.reveal-ready .reveal:not(.show) { opacity: 0; transform: translateY(30px); }

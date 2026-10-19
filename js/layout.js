@@ -10,13 +10,13 @@
 
   var SOCIALS = [
     { icon: "facebook-f", label: "فيسبوك", url: "https://www.facebook.com/phoenixKemetegypt" },
-    { icon: "instagram", label: "انستجرام", url: "#" },
+    { icon: "instagram", label: "انستجرام", url: "https://www.instagram.com/phoenixkemetofficial/" },
     { icon: "tiktok", label: "تيك توك", url: "#" },
     { icon: "whatsapp", label: "واتساب", url: "https://wa.me/201050166795" },
     { icon: "youtube", label: "يوتيوب", url: "#" }
   ];
 
-  var CONTACT_EMAIL = "info@phoenixkemet.com";
+  var CONTACT_EMAIL = "phoenixkemetofficial@gmail.com";
 
   function currentPage() {
     var file = location.pathname.split("/").pop();
@@ -58,7 +58,7 @@
 
     var contact = [
       '<li><i class="fas fa-phone" style="margin-inline-end:8px;"></i><span dir="ltr">+20 10 50166795</span></li>',
-      '<li><i class="fas fa-envelope" style="margin-inline-end:8px;"></i>info@phoenixkemet.com</li>',
+      '<li><i class="fas fa-envelope" style="margin-inline-end:8px;"></i><a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a></li>',
       '<li><i class="fas fa-clock" style="margin-inline-end:8px;"></i>يومياً 9:00 - 18:00</li>'
     ].join("");
 
@@ -89,7 +89,11 @@
       "<div><h4>روابط سريعة</h4><ul>" + links + "</ul></div>" +
       "<div><h4>السياسات</h4><ul>" + policies + "</ul></div>" +
       "<div><h4>تواصل معنا</h4><ul>" + contact + "</ul></div>" +
-      '</div><div class="footer-bottom"><p>جميع الحقوق محفوظة © <span class="heart">&#9825;</span> Phoenix Kemet — 2026</p></div></div>';
+      '</div>' +
+      '<div class="footer-bottom">' +
+      '<p>جميع الحقوق محفوظة © <span class="heart">&#9825;</span> Phoenix Kemet — 2026</p>' +
+      '<p class="footer-credit">تصميم وتطوير: <a href="mailto:islam.ashrf.elramady@gmail.com" title="للتواصل بخصوص تصميم المواقع">Islam Ashraf</a></p>' +
+      '</div></div>';
   }
 
   function wireNav() {
