@@ -485,6 +485,9 @@ img {
 
 .product-img {
   height: 250px;
+  min-height: 250px;
+  max-height: 250px;
+  overflow: hidden;
   background:
     radial-gradient(rgba(201, 162, 75, 0.18) 1px, transparent 1px),
     linear-gradient(160deg, var(--papyrus-soft), rgba(214, 185, 138, 0.35));
@@ -496,10 +499,26 @@ img {
   border-bottom: 1px solid rgba(201, 162, 75, 0.4);
 }
 
-.product-img img {
+/* Every product image fills exactly the same frame */
+.product-img img,
+.product-img .pro-icon {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
+}
+
+.product-img .pro-icon {
+  display: grid;
+  place-items: center;
+  font-size: 3.2rem;
+}
+
+.product-img > .badge-new {
+  z-index: 2;
 }
 
 .shop-filters {

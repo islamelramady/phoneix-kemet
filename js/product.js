@@ -60,7 +60,30 @@
     document.getElementById("add-cart-btn").addEventListener("click", function () { PK.addToCart(p, qty, selectedVariant); });
     // buy now
     document.getElementById("buy-now-btn").addEventListener("click", function () {
-      var text = "🎁 طلب: " + p.name + "\nالحجم: " + selectedVariant + "\nالكمية: " + qty + "\nالسعر: " + PK.formatPrice(p.price) + "\nالإجمالي: " + PK.formatPrice(p.price * qty) + "\n\nأرسل لنا.";
+      var orderNo = "PK-" + new Date().toISOString().slice(2, 10).replace(/-/g, "") + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+      var text =
+        "🛒 *طلب جديد — Phoenix Kemet*\n" +
+        "رقم الطلب: " + orderNo + "\n" +
+        "التاريخ: " + new Date().toLocaleDateString("ar-EG") + "\n" +
+        "━━━━━━━━━━━━━━━━━━\n" +
+        "*تفاصيل الطلب*\n" +
+        "1) " + p.name + "\n" +
+        "    • الكمية: " + qty + "\n" +
+        (selectedVariant && selectedVariant !== "—" ? "    • الحجم: " + selectedVariant + "\n" : "") +
+        "    • السعر: " + PK.formatPrice(p.price) + "\n" +
+        "    • الإجمالي: " + PK.formatPrice(p.price * qty) + "\n" +
+        "━━━━━━━━━━━━━━━━━━\n" +
+        "عدد القطع: " + qty + "\n" +
+        "*الإجمالي المطلوب: " + PK.formatPrice(p.price * qty) + "*\n" +
+        "━━━━━━━━━━━━━━━━━━\n" +
+        "*بيانات التوصيل*\n" +
+        "الاسم: \n" +
+        "رقم الهاتف: \n" +
+        "المحافظة / المدينة: \n" +
+        "العنوان بالتفصيل: \n" +
+        "ملاحظات: \n" +
+        "━━━━━━━━━━━━━━━━━━\n" +
+        "من فضلك أكّد الطلب، وفريقنا هيتواصل معاك لتأكيد العنوان والشحن. 🙏";
       window.open("https://wa.me/" + PK.WA_PHONE + "?text=" + encodeURIComponent(text), "_blank");
     });
     // wish

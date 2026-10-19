@@ -91,13 +91,44 @@
     var PK = window.PK;
     var cart = PK.state.cart;
     if (cart.length === 0) { PK.toast("السلة فارغة، أضف منتجاً أولاً.", "info"); return; }
-    var lines = cart.map(function (i) {
-      return "- " + i.name + " × " + i.qty + " (" + i.variant + ") = " + PK.formatPrice(i.price * i.qty);
-    }).join("\n");
-    var total = PK.cartTotal();
-    if (couponApplied) total = total * 0.9;
-    var text = "📦 طلب من Phoenix Kemet\n\n" + lines + "\n\nالمجموع: " + PK.formatPrice(total) +
-      "\n\nالاسم: ___\nالعنوان: ___\nالهاتف: ___\n\nأرسل لنا وسنتواصل معك.";
+
+    var sub = PK.cartTotal();
+    var discount = couponApplied ? sub * 0.1 : 0;
+    var total = sub - discount;
+    var count = cart.reduce(function (a, i) { return a + i.qty; }, 0);
+
+    var lines = cart.map(function (i, n) {
+      return (n + 1) + ") " + i.name +
+        "\n    • الكمية: " + i.qty +
+        (i.variant && i.variant !== "—" ? "\n    • الحجم: " + i.variant : "") +
+        "\n    • السعر: " + PK.formatPrice(i.price) +
+        "\n    • الإجمالي: " + PK.formatPrice(i.price * i.qty);
+    }).join("\n\n");
+
+    var orderNo = "PK-" + new Date().toISOString().slice(2, 10).replace(/-/g, "") + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+
+    var text =
+      "🛒 *طلب جديد — Phoenix Kemet*\n" +
+      "رقم الطلب: " + orderNo + "\n" +
+      "التاريخ: " + new Date().toLocaleDateString("ar-EG") + "\n" +
+      "━━━━━━━━━━━━━━━━━━\n" +
+      "*تفاصيل الطلب*\n" +
+      lines + "\n" +
+      "━━━━━━━━━━━━━━━━━━\n" +
+      "عدد القطع: " + count + "\n" +
+      "المجموع الفرعي: " + PK.formatPrice(sub) + "\n" +
+      (discount > 0 ? "الخصم (KEMET10 10%): -" + PK.formatPrice(discount) + "\n" : "") +
+      "*الإجمالي المطلوب: " + PK.formatPrice(total) + "*\n" +
+      "━━━━━━━━━━━━━━━━━━\n" +
+      "*بيانات التوصيل*\n" +
+      "الاسم: \n" +
+      "رقم الهاتف: \n" +
+      "المحافظة / المدينة: \n" +
+      "العنوان بالتفصيل: \n" +
+      "ملاحظات: \n" +
+      "━━━━━━━━━━━━━━━━━━\n" +
+      "من فضلك أكّد الطلب، وفريقنا هيتواصل معاك لتأكيد العنوان والشحن. 🙏";
+
     window.open("https://wa.me/" + PK.WA_PHONE + "?text=" + encodeURIComponent(text), "_blank");
   }
 
