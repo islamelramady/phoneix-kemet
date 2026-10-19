@@ -38,14 +38,26 @@
         <div class="info-card">
           <h3 style="color:var(--green);margin-bottom:14px;">معلومات التواصل</h3>
           <ul>
-            <li><i class="fab fa-whatsapp"></i><span>0155 831 5270</span></li>
+            <li><i class="fab fa-whatsapp"></i><span id="wa-number">+20 10 50166795</span></li>
             <li><i class="fas fa-envelope"></i><span>info@phoenixkemet.com</span></li>
             <li><i class="fas fa-clock"></i><span>أيام العمل، 9:00 - 18:00</span></li>
             <li><i class="fab fa-facebook-f"></i><a href="https://www.facebook.com/phoenixKemetegypt" target="_blank" rel="noopener">صفحتنا على فيسبوك</a></li>
           </ul>
           <div style="margin-top:18px;">
-            <a class="wa-btn" href="https://wa.me/2015558315270" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> راسلنا في واتساب</a>
+            <a class="wa-btn" id="wa-link" href="https://wa.me/201050166795" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> راسلنا في واتساب</a>
           </div>
+          <script>
+            (function () {
+              function fill() {
+                if (!window.PK || !PK.WA_PHONE) { setTimeout(fill, 50); return; }
+                var link = document.getElementById("wa-link");
+                var num = document.getElementById("wa-number");
+                if (link) link.href = "https://wa.me/" + PK.WA_PHONE;
+                if (num && PK.WA_DISPLAY) num.textContent = PK.WA_DISPLAY;
+              }
+              fill();
+            })();
+          </script>
         </div>
       </div>
     </section>

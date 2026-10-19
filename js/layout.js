@@ -12,7 +12,7 @@
     { icon: "facebook-f", label: "فيسبوك", url: "https://www.facebook.com/phoenixKemetegypt" },
     { icon: "instagram", label: "انستجرام", url: "#" },
     { icon: "tiktok", label: "تيك توك", url: "#" },
-    { icon: "whatsapp", label: "واتساب", url: "https://wa.me/2015558315270" },
+    { icon: "whatsapp", label: "واتساب", url: "https://wa.me/201050166795" },
     { icon: "youtube", label: "يوتيوب", url: "#" }
   ];
 
@@ -57,7 +57,7 @@
     }).join("");
 
     var contact = [
-      '<li><i class="fas fa-phone" style="margin-inline-end:8px;"></i>0155 831 5270</li>',
+      '<li><i class="fas fa-phone" style="margin-inline-end:8px;"></i><span dir="ltr">+20 10 50166795</span></li>',
       '<li><i class="fas fa-envelope" style="margin-inline-end:8px;"></i>info@phoenixkemet.com</li>',
       '<li><i class="fas fa-clock" style="margin-inline-end:8px;"></i>يومياً 9:00 - 18:00</li>'
     ].join("");
@@ -189,7 +189,7 @@
           return;
         }
         var text = "👋 رسالة من موقع Phoenix Kemet\n\nالاسم: " + name + "\nالبريد: " + email + "\nالموضوع: " + topic + "\n\nالرسالة:\n" + message;
-        window.open("https://wa.me/2015558315270?text=" + encodeURIComponent(text), "_blank");
+        window.open("https://wa.me/" + (window.PK && PK.WA_PHONE ? PK.WA_PHONE : "201050166795") + "?text=" + encodeURIComponent(text), "_blank");
         var note = document.getElementById("form-note");
         if (note) note.textContent = "تم فتح واتساب لإرسال رسالتك ✓";
       });
@@ -212,7 +212,7 @@
 
   // Floating WhatsApp button
   var wa = document.createElement("a");
-  wa.href = "https://wa.me/2015558315270";
+  wa.href = "https://wa.me/" + (window.PK && PK.WA_PHONE ? PK.WA_PHONE : "201050166795");
   wa.target = "_blank";
   wa.rel = "noopener";
   wa.className = "wa-float";

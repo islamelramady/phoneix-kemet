@@ -37,7 +37,8 @@
   window.PK = window.PK || {};
   window.PK.CATEGORIES = CATEGORIES;
   window.PK.PRODUCTS = PRODUCTS;
-  window.PK.WA_PHONE = "2015558315270";
+  window.PK.WA_PHONE = "201050166795";
+  window.PK.WA_DISPLAY = "+20 10 50166795";
   window.PK.formatPrice = function (n) { return (Number(n).toFixed(2) + " ج.م"); };
   window.PK.getProduct = function (id) { return PRODUCTS.find(function (p) { return p.id === Number(id); }); };
 })();
