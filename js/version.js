@@ -11,7 +11,15 @@
   if (window.__pkVersioned) return;
   window.__pkVersioned = true;
 
-  var token = window.PK_CACHE_BUST || "7";
+  /*
+   * The token must change on every deploy. Bump PK_CACHE_BUST by hand when
+   * you want to force every visitor to re-download css/js. As a safety net we
+   * also fold in the current date (UTC, YYYYMMDD) so a stale build always
+   * expires within a day even if nobody remembers to edit this file.
+   */
+  var handToken = window.PK_CACHE_BUST || "8";
+  var dayToken = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  var token = handToken + "." + dayToken;
 
   function stamp(target) {
     if (!target) return;

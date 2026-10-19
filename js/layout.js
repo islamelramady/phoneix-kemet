@@ -11,9 +11,7 @@
   var SOCIALS = [
     { icon: "facebook-f", label: "فيسبوك", url: "https://www.facebook.com/phoenixKemetegypt" },
     { icon: "instagram", label: "انستجرام", url: "https://www.instagram.com/phoenixkemetofficial/" },
-    { icon: "tiktok", label: "تيك توك", url: "#" },
-    { icon: "whatsapp", label: "واتساب", url: "https://wa.me/201050166795" },
-    { icon: "youtube", label: "يوتيوب", url: "#" }
+    { icon: "whatsapp", label: "واتساب", url: "https://wa.me/201050166795" }
   ];
 
   var CONTACT_EMAIL = "phoenixkemetofficial@gmail.com";
