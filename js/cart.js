@@ -1,6 +1,10 @@
 (function () {
   "use strict";
-  var couponApplied = false;
+  var appliedCoupon = null; // { code, percent, label }
+
+  function discountRate() {
+    return appliedCoupon ? appliedCoupon.percent / 100 : 0;
+  }
 
   function init() {
     if (!window.PK) { setTimeout(init, 50); return; }
@@ -12,6 +16,10 @@
     if (checkoutBtn) checkoutBtn.addEventListener("click", checkout);
     var couponBtn = document.getElementById("coupon-btn");
     if (couponBtn) couponBtn.addEventListener("click", applyCoupon);
+    var couponInput = document.getElementById("coupon-input");
+    if (couponInput) couponInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); applyCoupon(); }
+    });
   }
 
   function render() {
@@ -62,29 +70,52 @@
 
   function updateTotals() {
     var PK = window.PK;
-    var total = PK.cartTotal();
-    if (couponApplied) total = total * 0.9;
-    var sub = document.getElementById("sub-total");
+    var sub = PK.cartTotal();
+    var total = sub * (1 - discountRate());
+    var subEl = document.getElementById("sub-total");
     var grand = document.getElementById("grand-total");
-    if (sub) sub.textContent = PK.formatPrice(PK.cartTotal());
+    if (subEl) subEl.textContent = PK.formatPrice(sub);
     if (grand) grand.textContent = PK.formatPrice(total);
+
+    var discountRow = document.getElementById("discount-row");
+    var discountVal = document.getElementById("discount-val");
+    if (discountRow) {
+      if (appliedCoupon && sub > 0) {
+        discountRow.style.display = "";
+        if (discountVal) discountVal.textContent = "-" + PK.formatPrice(sub * discountRate());
+      } else {
+        discountRow.style.display = "none";
+      }
+    }
   }
 
   function applyCoupon() {
     var PK = window.PK;
     var input = document.getElementById("coupon-input");
     var msg = document.getElementById("coupon-msg");
-    var code = (input.value || "").trim().toUpperCase();
-    if (code === "KEMET10") {
-      couponApplied = true;
-      if (msg) { msg.textContent = "تم تطبيق خصم 10% ✓"; msg.style.color = "#27ae60"; }
+    var code = (input ? input.value : "").trim();
+    var found = PK.findCoupon(code);
+
+    if (found && !found.invalid) {
+      appliedCoupon = found;
+      if (msg) {
+        msg.textContent = "تم تطبيق «" + found.code + "» — خصم " + found.percent + "% ✓";
+        msg.style.color = "#27ae60";
+      }
       updateTotals();
-      PK.toast("تم تطبيق الخصم", "success");
-    } else {
-      couponApplied = false;
-      if (msg) { msg.textContent = "كود غير صالح."; msg.style.color = "#c0392b"; }
-      updateTotals();
+      PK.toast("تم تطبيق خصم " + found.percent + "%", "success");
+      return;
     }
+
+    appliedCoupon = null;
+    if (msg) {
+      if (found && found.invalid === "expired") msg.textContent = "هذا الكود انتهت صلاحيته.";
+      else if (found && found.invalid === "inactive") msg.textContent = "هذا الكود غير مفعّل حالياً.";
+      else msg.textContent = "كود غير صالح.";
+      msg.style.color = "#c0392b";
+    }
+    updateTotals();
+    if (found) PK.toast("تعذّر تطبيق الكود", "info");
   }
 
   function checkout() {
@@ -93,7 +124,7 @@
     if (cart.length === 0) { PK.toast("السلة فارغة، أضف منتجاً أولاً.", "info"); return; }
 
     var sub = PK.cartTotal();
-    var discount = couponApplied ? sub * 0.1 : 0;
+    var discount = sub * discountRate();
     var total = sub - discount;
     var count = cart.reduce(function (a, i) { return a + i.qty; }, 0);
 
@@ -117,7 +148,7 @@
       "━━━━━━━━━━━━━━━━━━\n" +
       "عدد القطع: " + count + "\n" +
       "المجموع الفرعي: " + PK.formatPrice(sub) + "\n" +
-      (discount > 0 ? "الخصم (KEMET10 10%): -" + PK.formatPrice(discount) + "\n" : "") +
+      (discount > 0 ? "الخصم (" + appliedCoupon.code + " " + appliedCoupon.percent + "%): -" + PK.formatPrice(discount) + "\n" : "") +
       "*الإجمالي المطلوب: " + PK.formatPrice(total) + "*\n" +
       "━━━━━━━━━━━━━━━━━━\n" +
       "*بيانات التوصيل*\n" +

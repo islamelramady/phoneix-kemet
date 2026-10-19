@@ -39,6 +39,36 @@
   window.PK.PRODUCTS = PRODUCTS;
   window.PK.WA_PHONE = "201050166795";
   window.PK.WA_DISPLAY = "+20 10 50166795";
+
+  /* ============================================================
+     أكواد الخصم — التحكم كله من هنا
+     ------------------------------------------------------------
+     code   : الكود اللي العميل يكتبه (لا يفرق كبير/صغير الأحرف)
+     percent: نسبة الخصم
+     label  : الوصف اللي يظهر في السلة وفي رسالة الواتساب
+     active : false => الكود يتوقف بدون ما تحذفه
+     expires: تاريخ الانتهاء "YYYY-MM-DD" أو null بدون صلاحية
+     ============================================================ */
+  window.PK.COUPONS = [
+    { code: "ESLAM",   percent: 20, label: "خصم خاص",        active: true, expires: null },
+    { code: "KEMET",   percent: 15, label: "خصم كيميت",      active: true, expires: null },
+    { code: "KEMET10", percent: 10, label: "خصم 10%",        active: true, expires: null }
+  ];
+
+  window.PK.findCoupon = function (code) {
+    var key = String(code || "").trim().toUpperCase();
+    if (!key) return null;
+    var today = new Date().toISOString().slice(0, 10);
+    for (var i = 0; i < window.PK.COUPONS.length; i++) {
+      var c = window.PK.COUPONS[i];
+      if (c.code !== key) continue;
+      if (c.active === false) return { code: key, invalid: "inactive" };
+      if (c.expires && today > c.expires) return { code: key, invalid: "expired" };
+      return c;
+    }
+    return null;
+  };
+
   window.PK.formatPrice = function (n) { return (Number(n).toFixed(2) + " ج.م"); };
   window.PK.getProduct = function (id) { return PRODUCTS.find(function (p) { return p.id === Number(id); }); };
 })();
